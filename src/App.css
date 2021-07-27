@@ -1,3 +1,31 @@
+@media (prefers-color-scheme: dark) {
+  img {
+    opacity: 0.75;
+    transition: opacity 0.5s ease-in-out;
+  }
+  img:hover {
+    opacity: 1;
+  }
+}
+@media (forced-colors: active) and (prefers-color-scheme: dark) {
+  img {
+    opacity: 0.75;
+    transition: opacity 0.5s ease-in-out;
+  }
+  img:hover {
+    opacity: 1;
+  }
+  .prefs__palette {
+    forced-color-adjust: #000;
+  }
+  .prefs__palette .c-label {
+    display: block;
+    padding: 0.25em;
+    background-color: Canvas;
+    color: CanvasText;
+  }
+}
+
 .App {
   text-align: center;
 }

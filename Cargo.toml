@@ -1,0 +1,19 @@
+[package]
+name = "glowing_guide"
+version = "0.1.0"
+authors = ["Stephen Smith <wearypossum4770@yahoo.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+structopt = "0.3.21"
+exitfailure = "0.5.1"
+reqwest = { version = "0.11.0", features = ["json"] }
+serde = "1.0.119"
+serde_json = "1.0.61"
+serde_derive = "1.0.119"
+warp = "0.2"
+futures = { version = "0.3", default-features = false }
+uuid = { version = "0.4", features = ["serde", "v4"] }
+tokio = { version = "1.0.2", features = ["full"] }
