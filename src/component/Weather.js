@@ -1,66 +1,59 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect} from "react";
 import useFetchData from "../hooks/useFetchData";
-const user = {
-  first_name: "Rowan",
 
-  last_name: "Atkinson",
-};
-//   https://dev.to/nipu/tips-tricks-of-javascript-react-3ncc
-window.user = user;
-const dateBuilder = (d) => {
-  let months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
-  let days = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ];
-  let day = days[d.getDay()];
-  let date = d.getDate();
-  let month = months[d.getMonth()];
-  let year = d.getFullYear();
-
-  return `${day} ${date} ${month} ${year}`;
-};
-export default function Weather() {
-  const [query, setQuery] = useState("");
+export default function Weather({
+  zip_code = 37416,
+  country_code = "US",
+  state_code = "Tennesse",
+  city_name = "Chattanooga",
+}) {
   const [weather, setWeather] = useState();
   let [isLoading, setIsLoading] = useState(true);
+  const [fetchData, setFetchData] = useState(false);
+  let [location, setLocation] = useState({ lat: null, long: null });
+  async function useNavigation() {
+    try {
+      navigator.geolocation.getCurrentPosition((position) => {
+        let { latitude, longitude } = position.coords;
+        setLocation({ lat: latitude, lon: longitude });
+        setFetchData(true);
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  }
   let api_key = "7af4edd80277ecd98c9eb7b15f9cfb84";
-  let country_code = "US";
-  let zip_code = 37416;
-  let state_code = "Tennesse";
-  let city_name = "Chattanooga";
-  let { response, errors } = useFetchData(
-    `https://api.openweathermap.org/data/2.5/weather?zip=${zip_code},${country_code}&appid=${api_key}&units=imperial`
+  let { response, error } = useFetchData(
+    fetchData,
+    `https://api.openweathermap.org/data/2.5/weather?lat=${location.lat}&lon=${location.lon}&appid=${api_key}&units=imperial`
   );
   useEffect(() => {
+    if (!navigator.geolocation) {
+      alert("Geolocation may not be supported");
+      return;
+    }
+    if (error) {
+      alert(`Something went wrong: ${error}`);
+      return;
+    }
     if (response && isLoading) {
       setWeather(response);
       setIsLoading(false);
     }
-  }, []);
+    if (location) {
+    }
+  }, [location, response, isLoading, error]);
   return (
     <div>
-      {!isLoading && (
+      {isLoading ? (
+        <button onClick={useNavigation}>Find My Location</button>
+      ) : (
         <div>
-          <h1>{weather.name}</h1>
+          <h1>Showing the weather for: {weather.name}</h1>
+          <img
+            alt={`weather icon shows ${weather?.weather[0]?.main}`}
+            src={`http://openweathermap.org/img/wn/${weather?.weather[0]?.icon}@2x.png`}
+          />
           <h1>{`Air Temperature: ${weather.main.temp} °F`}</h1>
           <h1>{`Feels Like: ${weather.main.feels_like} °F`}</h1>
         </div>

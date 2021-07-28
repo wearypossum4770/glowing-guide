@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-export default function useFetchData(url) {
+export default function useFetchData(performFetch, url) {
   let [response, setResponse] = useState();
   let [error, setError] = useState();
   useEffect(() => {
@@ -17,7 +17,10 @@ export default function useFetchData(url) {
         setError(err);
       }
     }
-    getData();
-  }, [url]);
+    if (performFetch) {
+      console.log(url)
+      getData();
+    }
+  }, [performFetch,url]);
   return { response: response, error: error };
 }
