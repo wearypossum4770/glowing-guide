@@ -14,6 +14,7 @@ export default function useFetchData(performFetch, url) {
           setResponse(data);
         }
       } catch (err) {
+        console.log()
         setError(err);
       }
     }
