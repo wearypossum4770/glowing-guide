@@ -14,14 +14,14 @@ export default function useFetchData(performFetch, url) {
           setResponse(data);
         }
       } catch (err) {
-        console.log()
+        console.log();
         setError(err);
       }
     }
     if (performFetch) {
-      console.log(url)
+      console.log(url);
       getData();
     }
-  }, [performFetch,url]);
+  }, [performFetch, url]);
   return { response: response, error: error };
 }
