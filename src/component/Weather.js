@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import useFetchData from "../hooks/useFetchData";
 import { dateBuilder } from "./helpers.js";
 export default function Weather({

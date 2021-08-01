@@ -47,7 +47,7 @@ const userSchema = new Schema(
     username: {
       trim: true,
       type: String,
-    
+
       unique: true,
       minlength: 3,
     },
@@ -56,7 +56,7 @@ const userSchema = new Schema(
       type: String,
       admin: false,
       unique: true,
-    
+
       match: /.+\@.+\..+/,
       index: { unique: true, sparse: true },
     },

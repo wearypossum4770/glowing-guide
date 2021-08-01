@@ -1,5 +1,5 @@
-import { BlogPost } from "../models/post.model.js";
 import { Router } from "express";
+import { BlogPost } from "../models/post.model.js";
 
 const blogPostRouter = Router();
 

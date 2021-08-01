@@ -1,5 +1,5 @@
-import mongoose from "mongoose";
 import cuid from "cuid";
+import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 

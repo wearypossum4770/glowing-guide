@@ -1,13 +1,13 @@
 "use strict";
-import express from "express";
+import optimus from "connect-image-optimus";
 import cors from "cors";
+import express from "express";
+import mongoose from "mongoose";
 import path from "path";
-import userRouter from "./routers/users.js";
+import admin from "sriracha";
 import exerciseRouter from "./routers/exercises.js";
 import blogPostRouter from "./routers/posts.js";
-import optimus from "connect-image-optimus";
-import admin from "sriracha";
-import mongoose from "mongoose";
+import userRouter from "./routers/users.js";
 let command = "sudo service mongodb start";
 var staticPath = path.dirname(".") + "/static/";
 const PORT = process.env.PORT || 3003;
@@ -40,12 +40,10 @@ app.locals.email = "me@myapp.com";
 app.use(cors());
 app.use(optimus(staticPath));
 app.use(express.static("files"));
-
-app.use(express.urlencoded({ extended: false,limit: '1mb', }));
-app.use(express.json({limit: '1mb', extended: true}));
+app.use(express.urlencoded({ extended: false, limit: "1mb" }));
+app.use(express.json({ limit: "1mb", extended: true }));
 app.get("/", (req, res) => {
-  res.send("Hello World!");
-  res.json({ ping: true });
+  res.json({ ping: true }, "Hello World!");
 });
 app.use(
   "/admin",

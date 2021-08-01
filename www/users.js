@@ -1,4 +1,4 @@
-import { readFileSync, write, writeFileSync } from "fs";
+import { readFileSync, writeFileSync } from "fs";
 
 let data = JSON.parse(
   readFileSync("../../silver-umbrella/users/fixtures/datainit.json")

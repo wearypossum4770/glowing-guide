@@ -7,6 +7,7 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "brotli": "^1.3.2",
     "connect-image-optimus": "^0.1.3",
     "cors": "^2.8.5",
     "cuid": "^2.1.8",
@@ -28,6 +29,7 @@
     "slugify": "^1.6.0",
     "sqlite3": "^5.0.2",
     "sriracha": "^1.0.0",
+    "typescript": "^4.3.5",
     "web-vitals": "^0.2.4",
     "workbox-background-sync": "^5.1.3",
     "workbox-broadcast-update": "^5.1.3",
@@ -69,7 +71,9 @@
     ]
   },
   "devDependencies": {
+    "@vue/compiler-sfc": "^3.1.5",
+    "morgan": "^1.10.0",
     "prettier": "^2.3.2",
-    "morgan": "^1.10.0"
+    "prettier-plugin-organize-imports": "^2.3.3"
   }
 }

@@ -1,11 +1,11 @@
-import Weather from "./component/Weather";
 import { useState } from "react";
-import Home from "./component/Home";
-import Dashboard from "./component/Dashboard";
-import About from "./component/About";
-import { UserDetail, Login } from "./component/UserDetail";
+import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import "./App.css";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import About from "./component/About";
+import Dashboard from "./component/Dashboard";
+import Home from "./component/Home";
+import { Login, UserDetail } from "./component/UserDetail";
+import Weather from "./component/Weather";
 export default function App() {
   let currentUser = {};
   const [user, setUser] = useState(currentUser);

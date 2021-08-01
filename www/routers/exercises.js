@@ -1,5 +1,5 @@
-import { Exercise } from "../models/exercise.model.js";
 import { Router } from "express";
+import { Exercise } from "../models/exercise.model.js";
 
 const exerciseRouter = Router();
 

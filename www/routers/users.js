@@ -1,22 +1,20 @@
 "use strict";
-import { User } from "../models/user.model.js";
 import { Router } from "express";
+import { User } from "../models/user.model.js";
 const userRouter = Router();
 userRouter.route("/bulk-create").post(async (req, res) => {
   try {
-    let  userList  = req.body;
-    let arr = userList?.map(user=>({
+    let userList = req.body;
+    let arr = userList?.map((user) => ({
       ...user,
-      madienName:user.madien_name,
-      firstName:user.first_name,
-      lastName:user.last_name,
-      middleName:user.middle_name,
-
-    }))
-    await User.create(arr)
-    await User.init()
-    res.json("Bulk Users Created")
-
+      madienName: user.madien_name,
+      firstName: user.first_name,
+      lastName: user.last_name,
+      middleName: user.middle_name,
+    }));
+    await User.create(arr);
+    await User.init();
+    res.json("Bulk Users Created");
   } catch (err) {
     res.status(400).json(`ERROR:${err.message}`);
   }

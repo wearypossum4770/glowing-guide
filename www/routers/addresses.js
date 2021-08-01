@@ -1,5 +1,5 @@
-import { Address } from "../models/addresses.models.js";
 import { Router } from "express";
+import { Address } from "../models/addresses.models.js";
 
 const addressRouter = Router();
 

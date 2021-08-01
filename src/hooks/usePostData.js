@@ -1,13 +1,13 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 export default function useFetchData(performFetch, url, data) {
   let [response, setResponse] = useState();
   let [error, setError] = useState();
   useEffect(() => {
     let options = {
       mode: "cors",
-      method:"POST",
-      processData:false,
-      body:JSON.stringify(data)
+      method: "POST",
+      processData: false,
+      body: JSON.stringify(data),
     };
     async function getData() {
       try {
