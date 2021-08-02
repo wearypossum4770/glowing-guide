@@ -1,8 +1,8 @@
 "use strict";
 import mongoose from "mongoose";
+import {addressSchema} from './address.model.js'
 const Schema = mongoose.Schema;
-const ObjectId = Schema.ObjectId;
-const userSchema = new Schema(
+export const userSchema = new Schema(
   {
     honorific_prefix: {
       trim: true,
@@ -60,6 +60,7 @@ const userSchema = new Schema(
       match: /.+\@.+\..+/,
       index: { unique: true, sparse: true },
     },
+    addresses:[addressSchema],
     alive: {
       admin: false,
       type: Boolean,
@@ -101,10 +102,7 @@ const userSchema = new Schema(
       adminSearchField: true,
     },
     retention_only: { type: Boolean, default: false, adminSearchField: true },
-    onboarding: {
-      signupDate: { type: Date, admin: false },
-      hasLoggedIn: { type: Boolean, default: false },
-    },
+
   },
   { timestamps: true }
 );
