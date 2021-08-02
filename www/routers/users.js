@@ -39,7 +39,7 @@ userRouter.route("/add").post(async (req, res) => {
       first_name: { firstName },
       last_name: { lastName },
       middle_name: { middleName },
-      madien_name:{madienName},
+      madien_name: { madienName },
       title,
       honorific_prefix /**:{honorificPrefix} */,
       honorific_suffix /**:{honorificSuffix} */,
@@ -89,7 +89,7 @@ userRouter.route("update/:id").post(async (req, res) => {
       honorific_prefix /**:{honorificPrefix} */,
       honorific_suffix /**:{honorificSuffix} */,
       suffix,
-      madien_name:{madienName},
+      madien_name: { madienName },
       date_of_death /**:{dateOfDeath} */,
       do_not_contact /**:{doNotContact} */,
     } = req.body;
@@ -99,7 +99,7 @@ userRouter.route("update/:id").post(async (req, res) => {
     user.firstName = firstName;
     user.lastName = lastName;
     user.middleName = middleName;
-    user.madienName=madienName
+    user.madienName = madienName;
     user.title = title;
     user.honorific_prefix = honorific_prefix;
     user.honorific_suffix = honorific_suffix;
