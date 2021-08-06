@@ -2,7 +2,7 @@
 import optimus from "connect-image-optimus";
 import cors from "cors";
 import express from "express";
-import mongoose from "mongoose";
+import database from "./config/db.js";
 import path from "path";
 import admin from "sriracha";
 import exerciseRouter from "./routers/exercises.js";
@@ -11,30 +11,9 @@ import userRouter from "./routers/users.js";
 let command = "sudo service mongodb start";
 var staticPath = path.dirname(".") + "/static/";
 const PORT = process.env.PORT || 3003;
-const URI = process.env.MONGO_URL || "mongodb://127.0.0.1:27017/glowingGuide";
-mongoose.connect(URI, { useNewUrlParser: true, useUnifiedTopology: true });
-const connection = mongoose.connection;
-connection.once("open", () => {
-  console.log("MongoDB database connection established successfully");
-});
-console.log(connection.readyState); //logs 0
-connection.on("connecting", () => {
-  console.log(`MongoDB status is connecting: ${connection.readyState}`);
-  console.log(connection.readyState); //logs 2
-});
-connection.on("connected", () => {
-  console.log(`MongoDB status is connected: ${connection.readyState}`);
-  console.log(connection.readyState); //logs 1
-});
-connection.on("disconnecting", () => {
-  console.log(`MongoDB status is disconnecting: ${connection.readyState}`);
-  console.log(connection.readyState); // logs 3
-});
-connection.on("disconnected", () => {
-  console.log(`MongoDB status is disconnected: ${connection.readyState}`);
-  console.log(connection.readyState); //logs 0
-});
+
 const app = express();
+database();
 app.locals.title = "My App";
 app.locals.email = "me@myapp.com";
 app.use(cors());
