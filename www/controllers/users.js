@@ -1,4 +1,4 @@
-import {User} from "../models/user.model.js";
+import { User } from "../models/user.model.js";
 const getAllUsers = async (req, res) => {
   try {
     let userList = (await User.find()) ?? [];
@@ -86,10 +86,4 @@ const bulkUserCreate = async (req, res) => {
     res.status(400).json(`ERROR:${err.message}`);
   }
 };
-export  {
-  getAllUsers,
-  createUser,
-  updateUser,
-  deleteUser,
-  bulkUserCreate,
-};
+export { getAllUsers, createUser, updateUser, deleteUser, bulkUserCreate };

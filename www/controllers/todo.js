@@ -37,9 +37,4 @@ const deleteTodo = async (req, res) => {
     res.status(400).json({ message: "Failed to delete", error: err.message });
   }
 };
-export {
-  getAllTodos,
-  createTodo,
-  updateTodo,
-  deleteTodo,
-};
+export { getAllTodos, createTodo, updateTodo, deleteTodo };

@@ -1,7 +1,8 @@
 import mongoose from "mongoose";
 export default async function database() {
   try {
-    const URI = process.env.MONGO_URL || "mongodb://127.0.0.1:27017/glowingGuide";
+    const URI =
+      process.env.MONGO_URL || "mongodb://127.0.0.1:27017/glowingGuide";
     mongoose.connect(URI, { useNewUrlParser: true, useUnifiedTopology: true });
     const connection = mongoose.connection;
     connection.once("open", () => {
