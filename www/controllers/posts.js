@@ -1,5 +1,5 @@
 "use strict";
-import {BlogPost} from "../models/post.model.js";
+import { BlogPost } from "../models/post.model.js";
 const getAllPost = async (req, res) => {
   try {
     const blogPostList = await BlogPost.find();
@@ -40,9 +40,4 @@ const deletePost = async (req, res) => {
     res.status(400).json({ message: "Failed to delete", error: err.message });
   }
 };
-export  {
-  getAllPost,
-  createPost,
-  updatePost,
-  deletePost,
-};
+export { getAllPost, createPost, updatePost, deletePost };

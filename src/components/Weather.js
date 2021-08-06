@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import useFetchData from "../hooks/useFetchData";
 import { dateBuilder } from "./helpers.js";
 export default function Weather({
   api_key = "7af4edd80277ecd98c9eb7b15f9cfb84",
@@ -10,19 +9,34 @@ export default function Weather({
 }) {
   const [location, setLocation] = useState({ lon: null, lat: null });
   const [weather, setWeather] = useState();
+  const [fetchWeather, setFetchWeather] = useState(false)
   const [fetchData, setFetchData] = useState(false);
   let [isLoading, setIsLoading] = useState(true);
   let [hide, setHide] = useState(true);
-  let { response, error } = useFetchData(
-    fetchData,
-    `https://api.openweathermap.org/data/2.5/weather?lat=${location.lat}&lon=${location.lon}&appid=${api_key}&units=imperial`
-  );
+  useEffect(()=>{
+    async function getWeather(){
+try{
+  const resp = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${location.lat}&lon=${location.lon}&appid=${api_key}&units=imperial`)
+  if (resp.ok){
+    let response = await resp.json()
+    setWeather(response)
+  }
+}catch(err){
+  alert("Cannot obtain weather");
+  alert(`Something went wrong: ${err.message}`);
+}
+    }
+    if (fetchWeather){
+      getWeather()
+    }
+  },[])
   const useNavigation = async () => {
     try {
       navigator.geolocation.getCurrentPosition((position) => {
         let { longitude, latitude } = position.coords;
         setLocation({ lat: latitude, lon: longitude });
         setFetchData(true);
+        setFetchWeather(true)
       });
     } catch (err) {
       alert("Unable to retrieve your location");
@@ -33,21 +47,8 @@ export default function Weather({
       alert("Geolocation may not be supported");
       return;
     }
-    if (error) {
-      alert(`Something went wrong: ${error}`);
-      return;
-    }
-    if (response && isLoading) {
-      setWeather(response);
-      setIsLoading(false);
-      setHide(false);
-    }
-    if (error) {
-      setHide(false);
-      alert("Cannot obtain weather");
-      setIsLoading(false);
-    }
-  }, [isLoading, response, error]);
+
+  }, [isLoading]);
   return (
     <div>
       {isLoading ? (
